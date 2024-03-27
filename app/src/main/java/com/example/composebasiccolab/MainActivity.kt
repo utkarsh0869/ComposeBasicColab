@@ -28,17 +28,20 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeBasicColabTheme {
 //                 A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp),
-                    color = Color.LightGray,
-                ) {
-                    Column {
-                        Greeting(name = "Hello Android!")
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Greeting(name = "Welcome to Jetpack Compose!")
+                Column {
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                        color = Color.LightGray,
+                    ) {
+                        Column {
+                            Greeting(name = "Hello Android!")
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Greeting(name = "Welcome to Jetpack Compose!")
+                        }
                     }
+                    Greeting2()
                 }
             }
         }
@@ -53,10 +56,25 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
+@Composable
+fun Greeting2() {
+    Column(modifier = Modifier.padding(all = 8.dp)) {
+        Text("This is greetings 2!")
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     ComposeBasicColabTheme {
         Greeting("Androids")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Greeting2Preview() {
+    ComposeBasicColabTheme {
+        Greeting2()
     }
 }
