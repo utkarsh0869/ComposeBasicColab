@@ -27,27 +27,30 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeBasicColabTheme {
-//                 A surface container using the 'background' color from the theme
-                Column {
-                    Surface(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp),
-                        color = Color.LightGray,
-                    ) {
-                        Column {
-                            Greeting(name = "Hello Android!")
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Greeting(name = "Welcome to Jetpack Compose!")
-                        }
-                    }
-                    Greeting2()
-                }
+                MyApp()
             }
         }
     }
 }
 
+@Composable
+fun MyApp() {
+    Column {
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            color = Color.LightGray,
+        ) {
+            Column {
+                Greeting(name = "Hello Android!")
+                Spacer(modifier = Modifier.height(16.dp))
+                Greeting(name = "Welcome to Jetpack Compose!")
+            }
+        }
+        Greeting2()
+    }
+}
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -58,23 +61,29 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun Greeting2() {
-    Column(modifier = Modifier.padding(all = 8.dp)) {
+    Column(
+        modifier = Modifier
+            .padding(all = 8.dp)
+            .background(Color.LightGray)
+            .fillMaxWidth()
+
+    ) {
         Text("This is greetings 2!")
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComposeBasicColabTheme {
-        Greeting("Androids")
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun GreetingPreview() {
+//    ComposeBasicColabTheme {
+//        Greeting("Androids")
+//    }
+//}
 
-@Preview(showBackground = true)
+@Preview(name = "name can be set here too", showBackground = true)
 @Composable
-fun Greeting2Preview() {
+fun MyAppPreview() {
     ComposeBasicColabTheme {
-        Greeting2()
+        MyApp()
     }
 }
