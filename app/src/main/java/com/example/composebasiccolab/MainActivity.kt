@@ -1,5 +1,6 @@
 package com.example.composebasiccolab
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -31,6 +32,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.font.FontWeight
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,7 +95,12 @@ fun Greeting(name: String) {
                     .padding(bottom = extraPadding)
             ) {
                 Text(text = "Hello,")
-                Text(text = name)
+                Text(
+                    text = name,
+                    style = MaterialTheme.typography.headlineMedium.copy(
+                        fontWeight = FontWeight.ExtraBold
+                    )
+                )
             }
             ElevatedButton(onClick = { expanded = !expanded }) {
                 Text(if(expanded) "Show Less" else "Show More")
@@ -138,6 +145,7 @@ fun MyAppPreview() {
     }
 }
 
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
