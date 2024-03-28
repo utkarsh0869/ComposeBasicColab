@@ -6,12 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -35,50 +37,18 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp() {
-    Column {
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            color = Color.LightGray,
-        ) {
-            Column {
-                Greeting(name = "Hello Android!")
-                Spacer(modifier = Modifier.height(16.dp))
-                Greeting(name = "Welcome to Jetpack Compose!")
-            }
+    Greeting(name = "Android")
+}
+
+@Composable
+fun Greeting(name: String) {
+    Surface(color = MaterialTheme.colorScheme.primary) {
+        Column(modifier = Modifier.padding(24.dp)){
+            Text(text = "Hello,")
+            Text(text = name)
         }
-        Greeting2()
     }
 }
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun Greeting2() {
-    Column(
-        modifier = Modifier
-            .padding(all = 8.dp)
-            .background(Color.LightGray)
-            .fillMaxWidth()
-
-    ) {
-        Text("This is greetings 2!")
-    }
-}
-
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    ComposeBasicColabTheme {
-//        Greeting("Androids")
-//    }
-//}
 
 @Preview(name = "name can be set here too", showBackground = true)
 @Composable
