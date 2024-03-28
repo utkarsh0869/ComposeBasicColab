@@ -40,6 +40,14 @@ fun MyApp() {
     var shouldShowOnboarding by remember { mutableStateOf(true) }
 
     if(shouldShowOnboarding) {
+        // we do not want the composable to mutate our state, it would be better to let it notify
+        // us when the user clicked on the continue button
+        // we can achieve this by passing callbacks down
+        // Callbacks are functions that are passed as arguments to other functions and get executed
+        // when the event occurs.
+        //By passing a function and not a state to OnboardingScreen we are making this composable
+        // more reusable and protecting the state from being mutated by other composables.
+        // In general, it keeps things simple.
         OnboardingScreen(onContinueClicked = { shouldShowOnboarding = false})
     } else {
         Greetings()
@@ -110,5 +118,13 @@ fun OnboardingPreview() {
 fun MyAppPreview() {
     ComposeBasicColabTheme {
         MyApp()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    ComposeBasicColabTheme {
+        Greetings()
     }
 }
