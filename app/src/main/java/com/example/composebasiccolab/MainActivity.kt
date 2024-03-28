@@ -53,11 +53,13 @@ fun Greeting(name: String) {
     val expanded = remember {
         mutableStateOf(false)
     }
+    val extraPadding = if (expanded.value) 48.dp else 0.dp
     Surface(color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
         Row(modifier = Modifier.padding(24.dp)) {
             Column(
                 modifier = Modifier
                     .weight(1f)
+                    .padding(bottom = extraPadding)
             ) {
                 Text(text = "Hello,")
                 Text(text = name)
