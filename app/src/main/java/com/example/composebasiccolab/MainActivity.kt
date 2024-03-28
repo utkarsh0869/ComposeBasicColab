@@ -3,6 +3,11 @@ package com.example.composebasiccolab
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.estimateAnimationDurationMillis
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -59,7 +64,7 @@ fun MyApp() {
 @Composable
 fun Greetings(names: List<String> = List(100) {"$it"}) {
     Column {
-        LazyColumn {
+        LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
             items(names) {
                 Greeting(name = it)
             }
@@ -72,7 +77,14 @@ fun Greeting(name: String) {
     var expanded by rememberSaveable {
         mutableStateOf(false)
     }
-    val extraPadding = if (expanded) 48.dp else 0.dp
+
+    val extraPadding by animateDpAsState(
+        if (expanded) 48.dp else 0.dp,
+        animationSpec = tween(
+            durationMillis = (5000)
+        ), label = ""
+    )
+
     Surface(color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)) {
         Row(modifier = Modifier.padding(24.dp)) {
             Column(
