@@ -20,7 +20,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.composebasiccolab.ui.theme.ComposeBasicColabTheme
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 
@@ -37,7 +40,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp() {
-    var shouldShowOnboarding by remember { mutableStateOf(true) }
+    var shouldShowOnboarding by rememberSaveable { mutableStateOf(true) }
 
     if(shouldShowOnboarding) {
         // we do not want the composable to mutate our state, it would be better to let it notify
@@ -54,17 +57,19 @@ fun MyApp() {
     }
 }
 @Composable
-fun Greetings(names: List<String> = listOf("World", "Compose")) {
+fun Greetings(names: List<String> = List(100) {"$it"}) {
     Column {
-        for(name in names) {
-            Greeting(name = name)
+        LazyColumn {
+            items(names) {
+                Greeting(name = it)
+            }
         }
     }
 }
 
 @Composable
 fun Greeting(name: String) {
-    var expanded by remember {
+    var expanded by rememberSaveable {
         mutableStateOf(false)
     }
     val extraPadding = if (expanded) 48.dp else 0.dp
